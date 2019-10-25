@@ -156,4 +156,17 @@ if (${CPP_INDIRECT_IS_SUBPROJECT})
         DESTINATION
             lib/cmake/indirect
     )
+
+    FetchContent_Declare(
+        checks_cache
+        GIT_REPOSITORY https://github.com/cristianadam/cmake-checks-cache.git
+    )
+
+    FetchContent_GetProperties(checks_cache)
+    if(NOT checks_cache_POPULATED)
+        FetchContent_Populate(checks_cache)
+        list(APPEND CMAKE_MODULE_PATH ${checks_cache_SOURCE_DIR}/CMakeChecksCache)
+        #message("Appending the path " ${checks_cache_SOURCE_DIR} ${CMAKE_MODULE_PATH})
+    endif()
+
 endif()
